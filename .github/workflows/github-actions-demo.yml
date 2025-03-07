@@ -1,0 +1,26 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Check for uppercase file names
+        run: |
+          UPPERCASE_FILES=$(find . -type f | grep -E '[A-Z]')
+          if [ -n "$UPPERCASE_FILES" ]; then
+            echo "❌ Error: The following files have uppercase letters:"
+            echo "$UPPERCASE_FILES"
+            exit 1
+          else
+            echo "✅ All file names are lowercase."
+          fi
+
+      - name: List files in the repository
+        run: ls -R
+
+      - run: echo "🍏 This job's status is ${{ job.status }}."
