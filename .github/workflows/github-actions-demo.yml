@@ -11,7 +11,7 @@ jobs:
 
       - name: Check for filenames with numbers (ignoring .git)
         run: |
-          FILES_WITH_NUMBERS=$(find . -type f ! -path './.git/*' | grep -E '[0-9]')
+          FILES_WITH_NUMBERS=$(find . -type f -not -path './.git/*' | grep -E '[0-9]')
           if [ -n "$FILES_WITH_NUMBERS" ]; then
             echo "❌ Error: The following files contain numbers in their names:"
             echo "$FILES_WITH_NUMBERS"
